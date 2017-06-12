@@ -3,24 +3,15 @@ var cargarPagina = function(){
 }
 
 var cargarPersonajes = function(){
-  $.ajax("https://swapi.co/api/people/",{
-    method:"GET",
-    dataType:"json",
-      // ambos son funciones y reciben un parametro, le pondremos response para acostumbrarse al flujo de peticion
-    success: function(response){
-        // console.log("respuesta",response);
-        // para obtener al arreglo de los personajes, varia depende el API,y que tenga propiedad results, chechar en postman
-        var personajes = response.results;
-        var total = response.count;
-        mostrarTotalPersonajes(total);
-        mostrarPersonajes(personajes);
-    },
-    error:function(error){
-      console.log("error",error);
-    }
-
-  })
-}
+  var url ="http://swapi.co/api/people/";
+  $.get(url,function(response){
+    console.log(response);
+    var personajes = response.results;
+    var total = response.count;
+    mostrarTotalPersonajes(total);
+    mostrarPersonajes(personajes);
+  });
+};
 var mostrarTotalPersonajes = function(total){
   $("#total").text(total)
 }
